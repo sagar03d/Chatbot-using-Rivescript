@@ -59,9 +59,23 @@ function loading_error(){
 include('connection.php');
 if(isset($_REQUEST['data'])){
 	$a = $_REQUEST['data'];
-	$query = "SELECT email FROM admin WHERE id=$a";
+	$query = "SELECT status FROM `O-rder` WHERE id=$a";
 	$b = mysqli_query($connect, $query);
 	$c = mysqli_fetch_array($b);
-	print_r($c);
+	$d = mysqli_num_rows($b);
+	if($d!=0){
+	if($c['status'] == 0){
+		echo "Your order is placed";
+	}
+	else if($c['status'] == 1){
+		echo "Your order is on the way";
+	}
+	else if($c['status'] == 2){
+		echo "Your order is Delivered";
+	}
+}
+	else{
+		echo "Your order detail is invalid";
+	}
 }
 ?>
