@@ -1,0 +1,35 @@
+! version = 2.0
+
++ (hello|hi)
+- Hello,\n May i know your name?
+
++ my name is *
+- <set name=<formal>>Nice to meet you, <get name>. What can I do for you?
+
++i am *
+- <set name=<formal>>Nice to meet you, <get name>. What can I do for you?
+
++ (what is my name|who am i)
+- You're <get name>, right?
+
++ *order*|*order|order*
+- Okay, Please tell me your order Id
+- may i know your order Id, Please
+
++ *forgot*password|forgot*password|*forgot*password*
+- please remember it
+- i can't help you about it
+
++ my order id is *
+- So, <set order_id=<formal>> <get order_id> is your order id.
+
++what is your name*|what is your name
+- my name is shoppy
+
++nice to meet*
+* <get name> == undefined =>nice to meet you too,uhh May i know your name?
+- Nice to meet you <get name>
+
++ *
+- I don't have a reply for that.
+- Try asking that a different way.
