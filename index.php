@@ -9,8 +9,10 @@
 <body>
 	<center>
 	<input type="text" name="msg" id="msg">
-	<input type="submit" name="reply" id="btn" value="Reply">
+	<p>tips: Enter to send message</p>
+	<div id="wrapper">
 	<div id="bot"></div>
+	</div>
 	<br>
 	<div id="d1" style="display: none">
 	<form action='index.php' method="post">
@@ -39,20 +41,33 @@ function loading_error(){
 	console.log("Loading Failed");
 }
 
-	btn.click(function(){
-		let input = $("#msg").val();
-		let reply = bot.reply("local-user",input);
-		div.html(reply);
-		let n = reply.search("id.");
-		if(n!=-1){
-			var num = reply.substring(5,7);
-			$('#data').val(num);
-			$('#d1').css('display','block');
-		}
+$(document).keypress(function(e) {
+if(e.which == 13) {
+	let input = $("#msg").val();
+	let reply = bot.reply("local-user",input);
+	div.html(reply);
+	$("#msg").val('');
+	$("#msg").focus();
+	let n = reply.search("id.");
+	if(n!=-1){
+		var num = reply.substring(5,7);
+		$('#data').val(num);
+		$('#d1').css('display','block');
+	}
+}
+});
 
-	});
 });
 	</script>
+	<style media="screen">
+#wrapper{
+	border: 2px solid green;
+    border-radius: 5px;
+		margin-left:500px;
+		margin-right: 500px;
+		padding-bottom: 200px;
+}
+	</style>
 </body>
 </html>
 <?php
